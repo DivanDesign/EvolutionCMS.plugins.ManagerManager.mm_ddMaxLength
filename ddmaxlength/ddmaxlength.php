@@ -17,41 +17,16 @@
  */
 
 function mm_ddMaxLength($tvs = '', $roles = '', $templates = '', $length = 150){
-	global $modx, $content;
+	global $modx, $mm_current_page;
 	$e = &$modx->Event;
 
 	if ($e->name == 'OnDocFormRender' && useThisRule($roles, $templates)){
 		$output = '';
+		
+		$tvs = tplUseTvs($mm_current_page['template'], $tvs, 'text,textarea');
+		if ($tvs == false){return;}
 
 		$site = $modx->config['site_url'];
-		
-		// Which template is this page using?
-		if (isset($content['template'])) {
-			$page_template = $content['template'];
-		} else {
-			// If no content is set, it's likely we're adding a new page at top level. 
-			// So use the site default template. This may need some work as it might interfere with a default template set by MM?
-			$page_template = $modx->config['default_template']; 
-		}
-
-// 		$tvsMas = array();
-		// Does this page's template use any image or file or text TVs?
-		$tvs = tplUseTvs($page_template, $tvs, 'text,textarea');
-// 		$tvsTemp = tplUseTvs($page_template, $tvs, 'text');
-// 		if ($tvsTemp){
-// 			foreach($tvsTemp as $v){
-// 				$v['type'] = 'text';
-// 				array_push($tvsMas,$v);
-// 			}
-// 		}
-
-// 		if (count($tvsMas) == 0){
-// 			return;
-// 		}
-		if ($tvs == false){
-			return;
-		}
-
 
 		$output .= "// ---------------- mm_ddMaxLength :: Begin ------------- \n";
 		//General functions
