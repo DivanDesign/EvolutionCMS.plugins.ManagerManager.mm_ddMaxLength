@@ -5,7 +5,7 @@
  *
  * Widget for ManagerManager plugin allowing number limitation of chars inputing in TV.
  * 
- * @param $tvs {comma separated string} - TV names to which the widget is applied. @required
+ * @param $fields {comma separated string} - TV names to which the widget is applied. @required
  * @param $roles {comma separated string} - The roles that the widget is applied to (when this parameter is empty then widget is applied to the all roles). Default: ''.
  * @param $templates {comma separated string} - Id of the templates to which this widget is applied. Default: ''.
  * @param $length {integer} - Maximum number of inputing chars. Default: 150.
@@ -16,15 +16,15 @@
  * http://www.DivanDesign.biz
  */
 
-function mm_ddMaxLength($tvs = '', $roles = '', $templates = '', $length = 150){
+function mm_ddMaxLength($fields = '', $roles = '', $templates = '', $length = 150){
 	global $modx, $mm_current_page;
 	$e = &$modx->Event;
 
 	if ($e->name == 'OnDocFormRender' && useThisRule($roles, $templates)){
 		$output = '';
 		
-		$tvs = tplUseTvs($mm_current_page['template'], $tvs, 'text,textarea');
-		if ($tvs == false){return;}
+		$fields = tplUseTvs($mm_current_page['template'], $fields, 'text,textarea');
+		if ($fields == false){return;}
 
 		$site = $modx->config['site_url'];
 
@@ -33,7 +33,7 @@ function mm_ddMaxLength($tvs = '', $roles = '', $templates = '', $length = 150){
 		$output .= includeJs($site.'assets/plugins/managermanager/widgets/ddmaxlength/jquery.ddmaxlength-1.0.min.js');
 		$output .= includeCss($site.'assets/plugins/managermanager/widgets/ddmaxlength/ddmaxlength.css');
 
-		foreach ($tvs as $tv){
+		foreach ($fields as $tv){
 			$output .= '
 $j("#tv'.$tv['id'].'").addClass("ddMaxLengthField").each(function(){
 	$j(this).parent().append("<div class=\"ddMaxLengthCount\"><span></span></div>");
