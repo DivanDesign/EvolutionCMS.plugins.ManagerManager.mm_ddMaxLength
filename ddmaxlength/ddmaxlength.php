@@ -32,7 +32,7 @@ function mm_ddMaxLength($fields = '', $roles = '', $templates = '', $length = 15
 
 		$output .= "// ---------------- mm_ddMaxLength :: Begin ------------- \n";
 		//General functions
-		$output .= includeJs($site.'assets/plugins/managermanager/widgets/ddmaxlength/jquery.ddmaxlength-1.0.min.js');
+		$output .= includeJs($site.'assets/plugins/managermanager/js/jquery.ddTools-1.8.1.min.js', 'js', 'jquery.ddTools', '1.8.1');
 		$output .= includeCss($site.'assets/plugins/managermanager/widgets/ddmaxlength/ddmaxlength.css');
 
 		foreach ($fields as $field){
@@ -42,7 +42,7 @@ $j("'.$mm_fields[$field]['fieldtype'].'[name='.$mm_fields[$field]['fieldname'].'
 }).ddMaxLength({
 	max: '.$length.',
 	containerSelector: "div.ddMaxLengthCount span",
-	warningClass: "maxLenghtWarning"
+	warningClass: "maxLengthWarning"
 });
 			';
 		}
@@ -53,8 +53,8 @@ $j("#mutate").submit(function(){
 	$j("div.ddMaxLengthCount span").each(function(){
 		var $this = $j(this), field = $this.parents(".ddMaxLengthCount:first").parent().find(".ddMaxLengthField");
 		if (parseInt($this.text()) < 0){
-			field.addClass("maxLenghtErrorField").focus(function(){
-				field.removeClass("maxLenghtErrorField");
+			field.addClass("maxLengthErrorField").focus(function(){
+				field.removeClass("maxLengthErrorField");
 			});
 			ddErrors.push(field.parents("tr").find("td:first-child .warning").text());
 		}
