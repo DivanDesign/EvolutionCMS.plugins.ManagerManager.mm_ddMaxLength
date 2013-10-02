@@ -3,9 +3,11 @@
  * mm_ddMaxLength
  * @version 1.0.1 (2012-01-13)
  *
- * Widget for ManagerManager plugin allowing number limitation of chars inputing in TV.
+ * Widget for ManagerManager plugin allowing number limitation of chars inputing in fields (or TVs).
  * 
- * @param $fields {comma separated string} - TV names to which the widget is applied. @required
+ * @uses ManagerManager plugin 0.5.2.
+ * 
+ * @param $fields {comma separated string} - The name(s) of the document fields (or TVs) which the widget is applied to. @required
  * @param $roles {comma separated string} - The roles that the widget is applied to (when this parameter is empty then widget is applied to the all roles). Default: ''.
  * @param $templates {comma separated string} - Id of the templates to which this widget is applied. Default: ''.
  * @param $length {integer} - Maximum number of inputing chars. Default: 150.
@@ -17,13 +19,13 @@
  */
 
 function mm_ddMaxLength($fields = '', $roles = '', $templates = '', $length = 150){
-	global $modx, $mm_current_page;
+	global $modx, $mm_current_page, $mm_fields;
 	$e = &$modx->Event;
 
 	if ($e->name == 'OnDocFormRender' && useThisRule($roles, $templates)){
 		$output = '';
 		
-		$fields = tplUseTvs($mm_current_page['template'], $fields, 'text,textarea');
+		$fields = getTplMatchedFields($fields, 'text,textarea');
 		if ($fields == false){return;}
 
 		$site = $modx->config['site_url'];
@@ -33,9 +35,9 @@ function mm_ddMaxLength($fields = '', $roles = '', $templates = '', $length = 15
 		$output .= includeJs($site.'assets/plugins/managermanager/widgets/ddmaxlength/jquery.ddmaxlength-1.0.min.js');
 		$output .= includeCss($site.'assets/plugins/managermanager/widgets/ddmaxlength/ddmaxlength.css');
 
-		foreach ($fields as $tv){
+		foreach ($fields as $field){
 			$output .= '
-$j("#tv'.$tv['id'].'").addClass("ddMaxLengthField").each(function(){
+$j("'.$mm_fields[$field]['fieldtype'].'[name='.$mm_fields[$field]['fieldname'].']").addClass("ddMaxLengthField").each(function(){
 	$j(this).parent().append("<div class=\"ddMaxLengthCount\"><span></span></div>");
 }).ddMaxLength({
 	max: '.$length.',
