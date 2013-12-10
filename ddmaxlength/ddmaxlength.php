@@ -1,7 +1,7 @@
 <?php
 /**
  * mm_ddMaxLength
- * @version 1.1 (2013-10-02)
+ * @version 1.1.1 (2013-12-10)
  * 
  * Widget for ManagerManager plugin allowing number limitation of chars inputing in fields (or TVs).
  * 
@@ -15,7 +15,7 @@
  * @event OnDocFormPrerender
  * @event OnDocFormRender
  * 
- * @link http://code.divandesign.biz/modx/mm_ddmaxlength/1.1
+ * @link http://code.divandesign.biz/modx/mm_ddmaxlength/1.1.1
  * 
  * @copyright 2013, DivanDesign
  * http://www.DivanDesign.biz
@@ -24,7 +24,7 @@
 function mm_ddMaxLength($fields = '', $roles = '', $templates = '', $length = 150){
 	if (!useThisRule($roles, $templates)){return;}
 	
-	global $modx, $mm_current_page, $mm_fields;
+	global $modx;
 	$e = &$modx->Event;
 	
 	$output = '';
@@ -37,13 +37,16 @@ function mm_ddMaxLength($fields = '', $roles = '', $templates = '', $length = 15
 		
 		$e->output($output);
 	}else if ($e->name == 'OnDocFormRender'){
+		global $mm_fields;
+		
 		$fields = getTplMatchedFields($fields, 'text,textarea');
 		if ($fields == false){return;}
 		
-		$output .= "// ---------------- mm_ddMaxLength :: Begin ------------- \n";
+		$output .= "//---------- mm_ddMaxLength :: Begin -----\n";
 		
 		foreach ($fields as $field){
-			$output .= '
+			$output .=
+'
 $j("'.$mm_fields[$field]['fieldtype'].'[name='.$mm_fields[$field]['fieldname'].']").addClass("ddMaxLengthField").each(function(){
 	$j(this).parent().append("<div class=\"ddMaxLengthCount\"><span></span></div>");
 }).ddMaxLength({
@@ -51,12 +54,12 @@ $j("'.$mm_fields[$field]['fieldtype'].'[name='.$mm_fields[$field]['fieldname'].'
 	containerSelector: "div.ddMaxLengthCount span",
 	warningClass: "maxLengthWarning"
 });
-			';
+';
 		}
 		
-		$output .= "\n// ---------------- mm_ddMaxLength :: End -------------";
+		$output .= "//---------- mm_ddMaxLength :: End -----\n";
 		
-		$e->output($output . "\n");
+		$e->output($output);
 	}
 }
 ?>
