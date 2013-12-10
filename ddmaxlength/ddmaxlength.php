@@ -30,10 +30,10 @@ function mm_ddMaxLength($fields = '', $roles = '', $templates = '', $length = 15
 	$output = '';
 	
 	if ($e->name == 'OnDocFormPrerender'){
-		$site = $modx->config['site_url'];
+		$widgetDir = $modx->config['site_url'].'assets/plugins/managermanager/widgets/ddmaxlength/';
 		
-		$output .= includeJsCss($site.'assets/plugins/managermanager/js/jquery.ddTools-1.8.1.min.js', 'html', 'jquery.ddTools', '1.8.1');
-		$output .= includeJsCss($site.'assets/plugins/managermanager/widgets/ddmaxlength/ddmaxlength.css', 'html');
+		$output .= includeJsCss($widgetDir.'ddmaxlength.css', 'html');
+		$output .= includeJsCss($widgetDir.'jquery.ddMM.mm_ddMaxLength.js', 'html', 'jquery.ddMM.mm_ddMaxLength', '1.0');
 		
 		$e->output($output);
 	}else if ($e->name == 'OnDocFormRender'){
@@ -53,29 +53,6 @@ $j("'.$mm_fields[$field]['fieldtype'].'[name='.$mm_fields[$field]['fieldname'].'
 });
 			';
 		}
-		
-		$output .= '
-$j("#mutate").submit(function(){
-	var ddErrors = new Array();
-	$j("div.ddMaxLengthCount span").each(function(){
-		var $this = $j(this), field = $this.parents(".ddMaxLengthCount:first").parent().find(".ddMaxLengthField");
-		if (parseInt($this.text()) < 0){
-			field.addClass("maxLengthErrorField").focus(function(){
-				field.removeClass("maxLengthErrorField");
-			});
-			ddErrors.push(field.parents("tr").find("td:first-child .warning").text());
-		}
-	});
-	
-	if(ddErrors.length > 0){
-		alert("Некорректно заполнены поля: " + ddErrors.join(","));
-		
-		return false;
-	}else{
-		return true;
-	}
-});
-		';
 		
 		$output .= "\n// ---------------- mm_ddMaxLength :: End -------------";
 		
