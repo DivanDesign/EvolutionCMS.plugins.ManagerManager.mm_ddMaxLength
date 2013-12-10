@@ -5,7 +5,7 @@
  * 
  * Widget for ManagerManager plugin allowing number limitation of chars inputing in fields (or TVs).
  * 
- * @uses ManagerManager plugin 0.5.2.
+ * @uses ManagerManager plugin 0.6.
  * 
  * @param $fields {comma separated string} - The name(s) of the document fields (or TVs) which the widget is applied to. @required
  * @param $roles {comma separated string} - The roles that the widget is applied to (when this parameter is empty then widget is applied to the all roles). Default: ''.
@@ -32,8 +32,8 @@ function mm_ddMaxLength($fields = '', $roles = '', $templates = '', $length = 15
 		
 		$output .= "// ---------------- mm_ddMaxLength :: Begin ------------- \n";
 		//General functions
-		$output .= includeJs($site.'assets/plugins/managermanager/js/jquery.ddTools-1.8.1.min.js', 'js', 'jquery.ddTools', '1.8.1');
-		$output .= includeCss($site.'assets/plugins/managermanager/widgets/ddmaxlength/ddmaxlength.css');
+		$output .= includeJsCss($site.'assets/plugins/managermanager/js/jquery.ddTools-1.8.1.min.js', 'js', 'jquery.ddTools', '1.8.1');
+		$output .= includeJsCss($site.'assets/plugins/managermanager/widgets/ddmaxlength/ddmaxlength.css', 'js');
 		
 		foreach ($fields as $field){
 			$output .= '
