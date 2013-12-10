@@ -12,6 +12,9 @@
  * @param $templates {comma separated string} - Id of the templates to which this widget is applied. Default: ''.
  * @param $length {integer} - Maximum number of inputing chars. Default: 150.
  * 
+ * @event OnDocFormPrerender
+ * @event OnDocFormRender
+ * 
  * @link http://code.divandesign.biz/modx/mm_ddmaxlength/1.1
  * 
  * @copyright 2013, DivanDesign
@@ -19,21 +22,25 @@
  */
 
 function mm_ddMaxLength($fields = '', $roles = '', $templates = '', $length = 150){
+	if (!useThisRule($roles, $templates)){return;}
+	
 	global $modx, $mm_current_page, $mm_fields;
 	$e = &$modx->Event;
 	
-	if ($e->name == 'OnDocFormRender' && useThisRule($roles, $templates)){
-		$output = '';
+	$output = '';
+	
+	if ($e->name == 'OnDocFormPrerender'){
+		$site = $modx->config['site_url'];
 		
+		$output .= includeJsCss($site.'assets/plugins/managermanager/js/jquery.ddTools-1.8.1.min.js', 'html', 'jquery.ddTools', '1.8.1');
+		$output .= includeJsCss($site.'assets/plugins/managermanager/widgets/ddmaxlength/ddmaxlength.css', 'html');
+		
+		$e->output($output);
+	}else if ($e->name == 'OnDocFormRender'){
 		$fields = getTplMatchedFields($fields, 'text,textarea');
 		if ($fields == false){return;}
 		
-		$site = $modx->config['site_url'];
-		
 		$output .= "// ---------------- mm_ddMaxLength :: Begin ------------- \n";
-		//General functions
-		$output .= includeJsCss($site.'assets/plugins/managermanager/js/jquery.ddTools-1.8.1.min.js', 'js', 'jquery.ddTools', '1.8.1');
-		$output .= includeJsCss($site.'assets/plugins/managermanager/widgets/ddmaxlength/ddmaxlength.css', 'js');
 		
 		foreach ($fields as $field){
 			$output .= '
