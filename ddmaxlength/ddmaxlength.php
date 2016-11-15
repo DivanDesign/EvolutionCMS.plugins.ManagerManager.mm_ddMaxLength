@@ -1,7 +1,7 @@
 <?php
 /**
  * mm_ddMaxLength
- * @version 1.1.1 (2013-12-10)
+ * @version 1.2 (2016-11-16)
  * 
  * @desc Widget for ManagerManager plugin allowing number limitation of chars inputing in fields (or TVs).
  * 
@@ -17,7 +17,7 @@
  * @event OnDocFormPrerender
  * @event OnDocFormRender
  * 
- * @link http://code.divandesign.biz/modx/mm_ddmaxlength/1.1.1
+ * @link http://code.divandesign.biz/modx/mm_ddmaxlength/1.2
  * 
  * @copyright 2012–2016 DivanDesign {@link http://www.DivanDesign.biz }
  */
