@@ -37,7 +37,7 @@ function mm_ddMaxLength(
 		$widgetDir = $modx->config['site_url'].'assets/plugins/managermanager/widgets/ddmaxlength/';
 		
 		$output .= includeJsCss($widgetDir.'ddmaxlength.css', 'html');
-		$output .= includeJsCss($widgetDir.'jquery.ddMM.mm_ddMaxLength.js', 'html', 'jquery.ddMM.mm_ddMaxLength', '1.0');
+		$output .= includeJsCss($widgetDir.'jQuery.ddMM.mm_ddMaxLength.js', 'html', 'jQuery.ddMM.mm_ddMaxLength', '1.0');
 		
 		$e->output($output);
 	}else if ($e->name == 'OnDocFormRender'){
