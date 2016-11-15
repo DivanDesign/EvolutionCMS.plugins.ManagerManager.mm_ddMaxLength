@@ -41,8 +41,6 @@ function mm_ddMaxLength(
 		
 		$e->output($output);
 	}else if ($e->name == 'OnDocFormRender'){
-		global $mm_fields;
-		
 		$fields = getTplMatchedFields($fields, 'text,textarea');
 		if ($fields == false){return;}
 		
@@ -51,7 +49,7 @@ function mm_ddMaxLength(
 		foreach ($fields as $field){
 			$output .=
 '
-$j("'.$mm_fields[$field]['fieldtype'].'[name='.$mm_fields[$field]['fieldname'].']").addClass("ddMaxLengthField").each(function(){
+$j.ddMM.fields.'.$field.'.$elem.addClass("ddMaxLengthField").each(function(){
 	$j(this).parent().append("<div class=\"ddMaxLengthCount\"><span></span></div>");
 }).ddMaxLength({
 	max: '.$length.',
