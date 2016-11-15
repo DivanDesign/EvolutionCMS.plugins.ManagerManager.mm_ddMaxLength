@@ -3,25 +3,29 @@
  * mm_ddMaxLength
  * @version 1.1.1 (2013-12-10)
  * 
- * Widget for ManagerManager plugin allowing number limitation of chars inputing in fields (or TVs).
+ * @desc Widget for ManagerManager plugin allowing number limitation of chars inputing in fields (or TVs).
  * 
  * @uses ManagerManager plugin 0.6.
  * 
- * @param $fields {comma separated string} - The name(s) of the document fields (or TVs) which the widget is applied to. @required
- * @param $roles {comma separated string} - The roles that the widget is applied to (when this parameter is empty then widget is applied to the all roles). Default: ''.
- * @param $templates {comma separated string} - Id of the templates to which this widget is applied. Default: ''.
- * @param $length {integer} - Maximum number of inputing chars. Default: 150.
+ * @param $fields {string_commaSeparated} — The name(s) of the document fields (or TVs) which the widget is applied to. @required
+ * @param $roles {string_commaSeparated} — The roles that the widget is applied to (when this parameter is empty then widget is applied to the all roles). Default: ''.
+ * @param $templates {string_commaSeparated} — Id of the templates to which this widget is applied. Default: ''.
+ * @param $length {integer} — Maximum number of inputing chars. Default: 150.
  * 
  * @event OnDocFormPrerender
  * @event OnDocFormRender
  * 
  * @link http://code.divandesign.biz/modx/mm_ddmaxlength/1.1.1
  * 
- * @copyright 2013, DivanDesign
- * http://www.DivanDesign.biz
+ * @copyright 2012–2016 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
-function mm_ddMaxLength($fields = '', $roles = '', $templates = '', $length = 150){
+function mm_ddMaxLength(
+	$fields = '',
+	$roles = '',
+	$templates = '',
+	$length = 150
+){
 	if (!useThisRule($roles, $templates)){return;}
 	
 	global $modx;
@@ -42,7 +46,7 @@ function mm_ddMaxLength($fields = '', $roles = '', $templates = '', $length = 15
 		$fields = getTplMatchedFields($fields, 'text,textarea');
 		if ($fields == false){return;}
 		
-		$output .= "//---------- mm_ddMaxLength :: Begin -----\n";
+		$output .= '//---------- mm_ddMaxLength :: Begin -----'.PHP_EOL;
 		
 		foreach ($fields as $field){
 			$output .=
@@ -57,7 +61,7 @@ $j("'.$mm_fields[$field]['fieldtype'].'[name='.$mm_fields[$field]['fieldname'].'
 ';
 		}
 		
-		$output .= "//---------- mm_ddMaxLength :: End -----\n";
+		$output .= '//---------- mm_ddMaxLength :: End -----'.PHP_EOL;
 		
 		$e->output($output);
 	}
