@@ -5,12 +5,14 @@
  * 
  * @desc Widget for ManagerManager plugin allowing number limitation of chars inputing in fields (or TVs).
  * 
- * @uses ManagerManager plugin 0.6.
+ * @uses PHP >= 5.4.
+ * @uses MODXEvo.plugin.ManagerManager >= 0.7.
  * 
- * @param $fields {string_commaSeparated} — The name(s) of the document fields (or TVs) which the widget is applied to. @required
- * @param $roles {string_commaSeparated} — The roles that the widget is applied to (when this parameter is empty then widget is applied to the all roles). Default: ''.
- * @param $templates {string_commaSeparated} — Id of the templates to which this widget is applied. Default: ''.
- * @param $length {integer} — Maximum number of inputing chars. Default: 150.
+ * @param $params {array_associative|stdClass} — The object of params. @required
+ * @param $params['fields'] {string_commaSeparated} — The name(s) of the document fields (or TVs) which the widget is applied to. @required
+ * @param $params['length'] {integer} — Maximum number of inputing chars. Default: 150.
+ * @param $params['roles'] {string_commaSeparated} — The roles that the widget is applied to (when this parameter is empty then widget is applied to the all roles). Default: ''.
+ * @param $params['templates'] {string_commaSeparated} — Id of the templates to which this widget is applied. Default: ''.
  * 
  * @event OnDocFormPrerender
  * @event OnDocFormRender
@@ -20,13 +22,33 @@
  * @copyright 2012–2016 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
-function mm_ddMaxLength(
-	$fields = '',
-	$roles = '',
-	$templates = '',
-	$length = 150
-){
-	if (!useThisRule($roles, $templates)){return;}
+function mm_ddMaxLength($params){
+	//For backward compatibility
+	if (
+		!is_array($params) &&
+		!is_object($params)
+	){
+		//Convert ordered list of params to named
+		$params = ddTools::orderedParamsToNamed([
+			'paramsList' => func_get_args(),
+			'compliance' => [
+				'fields',
+				'roles',
+				'templates',
+				'length'
+			]
+		]);
+	}
+	
+	//Defaults
+	$params = (object) array_merge([
+		'fields' => '',
+		'length' => 150,
+		'roles' => '',
+		'templates' => ''
+	], (array) $params);
+	
+	if (!useThisRule($params->roles, $params->templates)){return;}
 	
 	global $modx;
 	$e = &$modx->Event;
@@ -41,18 +63,18 @@ function mm_ddMaxLength(
 		
 		$e->output($output);
 	}else if ($e->name == 'OnDocFormRender'){
-		$fields = getTplMatchedFields($fields, 'text,textarea');
-		if ($fields == false){return;}
+		$params->fields = getTplMatchedFields($params->fields, 'text,textarea');
+		if ($params->fields == false){return;}
 		
 		$output .= '//---------- mm_ddMaxLength :: Begin -----'.PHP_EOL;
 		
-		foreach ($fields as $field){
+		foreach ($params->fields as $field){
 			$output .=
 '
 $j.ddMM.fields.'.$field.'.$elem.addClass("ddMaxLengthField").each(function(){
 	$j(this).parent().append("<div class=\"ddMaxLengthCount\"><span></span></div>");
 }).ddMaxLength({
-	max: '.$length.',
+	max: '.$params->length.',
 	containerSelector: "div.ddMaxLengthCount span",
 	warningClass: "maxLengthWarning"
 });
