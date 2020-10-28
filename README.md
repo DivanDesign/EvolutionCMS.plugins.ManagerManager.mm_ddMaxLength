@@ -14,7 +14,7 @@ Widget for ManagerManager plugin allowing number limitation of chars inputing in
 
 ### Installation
 
-To install you must unzip the archive to `/assets/plungins/managermanager/widgets/`.
+To install you must unzip the archive to `/assets/plungins/managermanager/widgets/ddmaxlength/`.
 
 
 You may also read this documentation:
