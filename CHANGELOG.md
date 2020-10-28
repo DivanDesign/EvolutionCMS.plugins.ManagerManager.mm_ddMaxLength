@@ -1,6 +1,19 @@
 # (MODX)EvolutionCMS.plugins.ManagerManager.mm_ddMaxLength changelog
 
 
+## Version 1.2.1 (2016-12-06)
+* \* Parameters → `$params->length`: Is cast to integer.
+
+
+## Version 1.2 (2016-11-15)
+* \* Attention! PHP >= 5.4 is required.
+* \* Attention! (MODX)EvolutionCMS.plugins.ManagerManager >= 0.7 is required.
+* \* Refactoring:
+	* \* The widget now using named parameters (with backward compatibility).
+	* \* `jQuery.ddMM.fields` is used istead of manually DOM finding.
+	* \* File name refactoring.
+
+
 ## Version 1.1.1 (2013-12-10)
 * \* The calls of the functions `includeJs` and `includeCss` were replaced by `includeJsCss`.
 * \* The including of required JS and CSS files is currently being realized while occuring the event `OnDocFormPrerender`. The files are included as HTML.
