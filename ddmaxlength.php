@@ -1,13 +1,13 @@
 <?php
 /**
- * mm_ddMaxLength
- * @version 1.2.1 (2016-12-06)
+ * (MODX)EvolutionCMS.plugins.ManagerManager.mm_ddMaxLength
+ * @version 1.3 (2020-10-28)
  * 
  * @see README.md
  * 
  * @link https://code.divandesign.biz/modx/mm_ddmaxlength
  * 
- * @copyright 2012–2016 DD Group {@link https://DivanDesign.biz }
+ * @copyright 2012–2020 DD Group {@link https://DivanDesign.biz }
  */
 
 function mm_ddMaxLength($params){

@@ -1,6 +1,20 @@
 # (MODX)EvolutionCMS.plugins.ManagerManager.mm_ddMaxLength changelog
 
 
+## Версия 1.3 (2020-10-28)
+* \+ Параметры → `$params->allowTypingOverLimit`: Новый параметр. Позволяет отключить возможность ввода с превышением лимита.
+* \* Рефакторинг:
+	* \* Используется `\DDTools\ObjectTools::extend` вместо `array_merge`.
+	* \* Используется `$modx->getConfig('site_url')` вместо `$modx->config['site_url']`.
+	* \* Используется `jQuery.ddMM.getFieldElems`.
+* \* Изменена структура репозитория.
+* \+ README.
+* \+ README_ru.
+* \+ CHANGELOG.
+* \+ CHANGELOG_ru.
+* \+ Composer.json.
+
+
 ## Версия 1.2.1 (2016-12-06)
 * \* Параметры → `$params->length`: Приводится к integer.
 

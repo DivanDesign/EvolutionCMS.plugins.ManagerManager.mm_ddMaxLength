@@ -1,6 +1,20 @@
 # (MODX)EvolutionCMS.plugins.ManagerManager.mm_ddMaxLength changelog
 
 
+## Version 1.3 (2020-10-28)
+* \+ Parameters → `$params->allowTypingOverLimit`: The new parameter. It allows to disable typing over limit.
+* \* Refactoring:
+	* \* `\DDTools\ObjectTools::extend` is used instead of `array_merge`.
+	* \* `$modx->getConfig('site_url')` is used istead of `$modx->config['site_url']`.
+	* \* `jQuery.ddMM.getFieldElems` is used.
+* \* Repository structure was changed.
+* \+ README.
+* \+ README_ru.
+* \+ CHANGELOG.
+* \+ CHANGELOG_ru.
+* \+ Composer.json.
+
+
 ## Version 1.2.1 (2016-12-06)
 * \* Parameters → `$params->length`: Is cast to integer.
 
