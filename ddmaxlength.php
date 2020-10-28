@@ -29,16 +29,18 @@ function mm_ddMaxLength($params){
 	}
 	
 	//Defaults
-	$params = (object) array_merge(
-		[
-			'fields' => '',
-			'length' => 150,
-			'allowTypingOverLimit' => true,
-			'roles' => '',
-			'templates' => ''
-		],
-		(array) $params
-	);
+	$params = \DDTools\ObjectTools::extend([
+		'objects' => [
+			(object) [
+				'fields' => '',
+				'length' => 150,
+				'allowTypingOverLimit' => true,
+				'roles' => '',
+				'templates' => ''
+			],
+			$params
+		]
+	]);
 	
 	if (
 		!useThisRule(
