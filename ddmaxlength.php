@@ -58,7 +58,7 @@ function mm_ddMaxLength($params){
 	
 	if ($e->name == 'OnDocFormPrerender'){
 		$widgetDir =
-			$modx->config['site_url'] .
+			$modx->getConfig('site_url') .
 			'assets/plugins/managermanager/widgets/ddmaxlength/'
 		;
 		
