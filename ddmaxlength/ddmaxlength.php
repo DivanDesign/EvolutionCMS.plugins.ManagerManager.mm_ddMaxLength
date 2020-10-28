@@ -85,7 +85,7 @@ function mm_ddMaxLength($params){
 			),
 			'html',
 			'jQuery.ddMM.mm_ddMaxLength',
-			'1.0'
+			'1.0.1'
 		);
 		
 		$e->output($output);
