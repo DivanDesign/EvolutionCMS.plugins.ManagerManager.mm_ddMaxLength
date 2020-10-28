@@ -11,6 +11,7 @@
  * @param $params {arrayAssociative|stdClass} — The object of params. @required
  * @param $params['fields'] {stringCommaSeparated} — The name(s) of the document fields (or TVs) which the widget is applied to. @required
  * @param $params['length'] {integer} — Maximum number of inputing chars. Default: 150.
+ * @param $params['allowTypingOverLimit'] {boolean} — Is typing over limit allowed? In this case you can enter any length text but you can't save document if the limit is over. Default: true.
  * @param $params['roles'] {stringCommaSeparated} — The roles that the widget is applied to (when this parameter is empty then widget is applied to the all roles). Default: ''.
  * @param $params['templates'] {stringCommaSeparated} — Id of the templates to which this widget is applied. Default: ''.
  * 
@@ -45,6 +46,7 @@ function mm_ddMaxLength($params){
 		[
 			'fields' => '',
 			'length' => 150,
+			'allowTypingOverLimit' => true,
 			'roles' => '',
 			'templates' => ''
 		],
@@ -123,6 +125,7 @@ $j.ddMM
 	})
 	.ddMaxLength({
 		max: ' . intval($params->length) . ',
+		canWriteError: ' . intval($params->allowTypingOverLimit) . ',
 		containerSelector: "div.ddMaxLengthCount span",
 		warningClass: "maxLengthWarning"
 	})
