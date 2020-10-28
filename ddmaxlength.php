@@ -95,16 +95,17 @@ function mm_ddMaxLength($params){
 			PHP_EOL
 		;
 		
-		foreach (
-			$params->fields as
-			$field
-		){
-			$output .=
+		$output .=
 '
 $j.ddMM
-	.fields
-	.' . $field . '
-	.$elem
+	.getFieldElems({
+		fields: ' .
+			\DDTools\ObjectTools::convertType([
+				'object' => $params->fields,
+				'type' => 'stringJsonArray'
+			]) .
+		'
+	}).
 	.addClass("ddMaxLengthField")
 	.each(function(){
 		$j(this)
@@ -120,8 +121,7 @@ $j.ddMM
 	})
 ;
 '
-			;
-		}
+		;
 		
 		$output .=
 			'//---------- mm_ddMaxLength :: End -----' .
