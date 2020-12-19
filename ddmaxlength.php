@@ -105,7 +105,7 @@ $j.ddMM
 				'type' => 'stringJsonArray'
 			]) .
 		'
-	}).
+	})
 	.addClass("ddMaxLengthField")
 	.each(function(){
 		$j(this)
