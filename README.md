@@ -54,7 +54,7 @@ You may also read this documentation:
 		* `''` — when this parameter is empty then widget is applied to the all roles
 	* Default value: `''`
 	
-* `$params->roles[i]`
+* `$params->roles[$i]`
 	* Desctription: CMS user role.
 	* Valid values: `integer`
 	* **Required**
@@ -66,7 +66,7 @@ You may also read this documentation:
 		* `''` — empty value means the widget is applying to all templates
 	* Default value: `''`
 	
-* `$params->templates[i]`
+* `$params->templates[$i]`
 	* Desctription: Templates ID.
 	* Valid values: `integer`
 	* **Required**
