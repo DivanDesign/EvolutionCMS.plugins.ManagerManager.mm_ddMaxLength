@@ -1,16 +1,16 @@
 /**
  * jQuery.ddMM.mm_ddMaxLength
- * @version 1.0.1 (2020-10-28)
+ * @version 1.0.2 (2024-08-06)
  * 
  * @uses jQuery 1.9.1
  * @uses jQuery.ddTools 1.8.1
  * @uses jQuery.ddMM 1.1.2
  * 
- * @copyright 2013–2020 [DD Group]{@link https://DivanDesign.biz }
+ * @copyright 2013–2024 https://Ronef.me
  */
 
 (function($){
-//On document.ready
+// On document.ready
 $(function(){
 	$.ddMM.$mutate.on(
 		'submit',

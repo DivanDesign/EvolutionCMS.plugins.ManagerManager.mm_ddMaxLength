@@ -11,12 +11,12 @@
  */
 
 function mm_ddMaxLength($params){
-	//For backward compatibility
+	// For backward compatibility
 	if (
 		!is_array($params) &&
 		!is_object($params)
 	){
-		//Convert ordered list of params to named
+		// Convert ordered list of params to named
 		$params = \ddTools::orderedParamsToNamed([
 			'paramsList' => func_get_args(),
 			'compliance' => [
@@ -28,7 +28,7 @@ function mm_ddMaxLength($params){
 		]);
 	}
 	
-	//Defaults
+	// Defaults
 	$params = \DDTools\ObjectTools::extend([
 		'objects' => [
 			(object) [
@@ -76,7 +76,7 @@ function mm_ddMaxLength($params){
 			),
 			'html',
 			'jQuery.ddMM.mm_ddMaxLength',
-			'1.0.1'
+			'1.0.2'
 		);
 		
 		$e->output($output);
